@@ -46,3 +46,12 @@ app.get("/person/:id", (request, response) => {
         response.send(result);
     });
 });
+
+app.delete("/person/:id", (request, response) => {
+    collection.remove({ "_id": new ObjectId(request.params.id) }, (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
+});
