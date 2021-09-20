@@ -29,6 +29,15 @@ app.post("/person", (request, response) => {
     })
 })
 
+app.put("/person/:id", (request, response) => {
+    collection.replaceOne({ "_id": new ObjectId(request.params.id) }, request.body, (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        response.send(result.result);
+    })
+})
+
 app.get("/person", (request, response) => {
     collection.find({}).toArray((error, result) => {
         if (error) {
